@@ -1,6 +1,6 @@
 $current = Split-Path -Parent $PSCommandPath
 
-Write-Host "This script will update the entire applciation to the latest version.`n"
+Write-Host "This script will update the entire application to the latest version and refresh the data.`n"
 
 Write-Host "Working directory: $current`n"
 

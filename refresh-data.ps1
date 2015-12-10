@@ -3,7 +3,7 @@ $config_data = "https://docs.google.com/spreadsheets/d/1DHz86iUMtQNFc6jAPTXspJTF
 
 $current = Split-Path -Parent $PSCommandPath
 
-#Try {
+Try {
     New-Item -ItemType Directory -Force -Path "$current\assets\data" | Out-Null
 
     $wc = New-Object System.Net.WebClient
@@ -66,13 +66,14 @@ $current = Split-Path -Parent $PSCommandPath
     $b = 'var languageData = ' + $b
     Out-File -inputobject $b -filepath "assets/data/text.js"
 
-#}
-#Catch [system.exception] {
-#	"An error occured, try again later"
-#	Return
-#}
-Write-Host "`nUpdate completed successfully`n"
+}
+Catch [system.exception] {
+	Write-Host "`nAn error occured, try again later`n"
+    Write-Host "Press any key to continue ..."
+	Return
+}
 
+Write-Host "`nUpdate completed successfully`n"
 Write-Host "Press any key to continue ..."
 
 $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | Out-Null
