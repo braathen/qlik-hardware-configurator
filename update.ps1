@@ -22,5 +22,5 @@ if ($confirmation -eq 'y') {
 
     Remove-Item -Recurse -Force "$current\master.zip"
 
-    Invoke-Expression "$current\refresh-data.ps1"
+    &"$current\refresh-data.ps1"
 }

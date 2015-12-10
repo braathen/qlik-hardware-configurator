@@ -1,8 +1,10 @@
 $config_language = "https://docs.google.com/spreadsheets/d/18GG6fMRb9AlFSY4SVesTTl8i4YR11XHcPPjksua9-Cs/pub?output=csv"
 $config_data = "https://docs.google.com/spreadsheets/d/1DHz86iUMtQNFc6jAPTXspJTFjUVEK4613eNQLrCrV2c/pub?output=csv"
-$prod = 0
+
+$current = Split-Path -Parent $PSCommandPath
 
 #Try {
+    New-Item -ItemType Directory -Force -Path "$current\assets\data" | Out-Null
 
     $wc = New-Object System.Net.WebClient
     $wc.Encoding = [System.Text.Encoding]::UTF8
