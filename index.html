@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Qlik Hardware Configurator</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/simple-sidebar.css" rel="stylesheet">
+    <link href="assets/css/touch-friendly.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/custom.css" media="screen" rel="stylesheet">
+    <link href="assets/css/print.css" media="print" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+
+<div id="sidebar-content" style="margin-left: 15px;">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <br> <div class="text-muted">Product</div>
+      <br>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn">
+          <input type="radio" name='r_product' value='Sense'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i> <span>  Qlik Sense</span>
+        </label>
+        <label class="btn">
+          <input type="radio" name='r_product' value='QlikView'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span> QlikView</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <br> <div class="text-muted">Platform</div>
+      <br>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn active">
+          <input type="checkbox" name='chk_Physical' checked><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i> <span>  Physical</span>
+        </label>
+        <label class="btn active">
+          <input type="checkbox" name='chk_Virtual' checked><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i><span> Virtual</span>
+        </label>
+        <label class="btn active">
+          <input type="checkbox" name='chk_AWS' checked><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i><span> AWS</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <br> <div class="text-muted">Users</div>
+      <br>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn">
+          <input type="radio" name='r_users' value='SMALL'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i> <span>  Small <small>&lt; 200 users</small></span>
+        </label>
+        <label class="btn">
+          <input type="radio" name='r_users' value='MEDIUM'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span> Medium <small>&lt; 800 users</small></span>
+        </label>
+        <label class="btn">
+          <input type="radio" name='r_users' value='LARGE'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span> Large <small>&gt; 800 users</small></span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+<div class="row" id="optionalCheckbox">
+    <div class="col-xs-12">
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="btn" id="l_options">
+          <input type="checkbox" name='chk_options'><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i> <span id="optional"> High availability</span>
+        </label>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                
+                <div id="container-welcome">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="container-welcomepage"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container-recommendation" style="display:none;">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="container-hardware"></div>
+                            <div class="qlik-printable">
+                              <div id="container-data"></div>
+<!--
+                                <img src="assets/img/qlik-logo-v211.png" width="150">                            
+
+                                <p>&nbsp;</p>
+
+                                <div id="container-header"></div>
+
+                                <p>&nbsp;</p>
+
+                                <h4 class="qlik-printable">Hardware Recommendation</h4>
+
+                                <p>&nbsp;</p>
+                            </div>
+
+                            <div id="container-hardware"></div>
+
+                            <div class="qlik-printable">
+                              <div id="container-system"></div>
+-->
+
+                            </div>                            
+                        </div>
+                    </div>
+
+<!--                    <div class="qlik-printable">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <small><div id="container-disclaimer"></div></small>
+                            </div>
+                        </div>
+                    </div>
+-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>&nbsp;</h4>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Next</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery, Bootstrap & Lodash etc -->
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/lodash.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $(".qlik-printable").toggleClass("qlik-toggled");
+        showResults();
+        $(this).text(function(i, text){
+            return text === "Next" ? "Back" : "Next";
+        })
+    });
+    </script>
+
+    <!-- Hardware sizing -->
+    <script type="text/javascript" src="assets/js/table-renderer.js"></script>
+    <script type="text/javascript" src="assets/data/config_data.js"></script>
+    <script type="text/javascript" src="assets/data/text.js"></script>
+    <script type="text/javascript" src="assets/js/hwsizing.js"></script>
+
+</body>
+
+</html>
