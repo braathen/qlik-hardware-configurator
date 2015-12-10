@@ -216,6 +216,7 @@ function showResults() {
     else
     {
         $("#sidebar-wrapper").html(sidebar);        
+        location.reload();
     }
 }
 
