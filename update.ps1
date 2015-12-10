@@ -21,4 +21,6 @@ if ($confirmation -eq 'y') {
     Remove-Item -Recurse -Force "$current\qlik-hardware-configurator-master"
 
     Remove-Item -Recurse -Force "$current\master.zip"
+
+    Invoke-Expression "$current\refresh-data.ps1"
 }
