@@ -71,7 +71,7 @@ $current = Split-Path -Parent $PSCommandPath
 #	"An error occured, try again later"
 #	Return
 #}
-Write-Host "Update completed successfully"
+Write-Host "`nUpdate completed successfully`n"
 
 Write-Host "Press any key to continue ..."
 
