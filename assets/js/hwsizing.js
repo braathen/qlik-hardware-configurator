@@ -3,6 +3,8 @@ var platform = ['Physical', 'Virtual', 'AWS'];
 var x_physical = false;
 var x_virtual = false;
 var x_aws = false;
+var x_qlikview = false;
+var x_sense = false;
 var x_product = "";
 
 $("input:radio, input:checkbox").change(function () {    
@@ -75,7 +77,6 @@ $("input:radio, input:checkbox").change(function () {
             });
 
             var x = uniq(renderData);
-            console.log(x);
 
             $('#table-wrapper-' + p).renderTable({
                     template: rowTemplate,
@@ -132,12 +133,22 @@ function compareArrays(str, arr) {
     {
         // do nothing for now
     }
-    else if (str.indexOf(" ") > -1)
+    else if ((str.match(/ /g) || []).length == 2)
     {
-        arr = arr + " " + $('input[name=r_product]:checked').val().toLowerCase();
-        arr = arr + " " + $('input[name=r_users]:checked').val().toLowerCase();
+        if($('input[name=r_product]:checked').val() != undefined)
+            arr = arr + " " + $('input[name=r_product]:checked').val().toLowerCase();
+        if($('input[name=r_users]:checked').val().toLowerCase() != undefined)
+            arr = arr + " " + $('input[name=r_users]:checked').val().toLowerCase();
     }
-    return _.isEqual(str.split(" ").sort(), arr.split(" ").sort());
+    else if ((str.match(/ /g) || []).length == 1)
+    {
+        if($('input[name=r_product]:checked').val() != undefined)
+            arr = arr + " " + $('input[name=r_product]:checked').val().toLowerCase();
+    }
+    return _.isEqual(str.split(" ").sort(), arr.split(" ").sort())
+
+//    else if (str.indexOf(" ") > -1)
+
 }
 
 function getText(tags) {
@@ -146,11 +157,13 @@ function getText(tags) {
     x_physical = $('input[name="chk_Physical"]').is(':checked');
     x_virtual = $('input[name="chk_Virtual"]').is(':checked');
     x_aws = $('input[name="chk_AWS"]').is(':checked');
+    x_sense = $('input[name=r_product]:checked').val() == "Sense";
+    x_qlikview = $('input[name=r_product]:checked').val() == "QlikView";
 
     // sort by most tags (?????)
-    //var z = _.sortBy(languageData, function(n) {
-    //  return n.Tags.split(" ").length;
-    //}).reverse();
+    var z = _.sortBy(languageData, function(n) {
+      return n.Tags.split(" ").length;
+    }).reverse();
 
     // get text for language
     var x = _.find(languageData, function(item) {
@@ -162,7 +175,10 @@ function getText(tags) {
 
     // no match
     if(x == undefined)
+    {
+        console.log(tags);
         return "[NOT IMPLEMENTED YET]";
+    }
 
     // convert from base64
     if (_.result(x, 'Text') != undefined)
