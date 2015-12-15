@@ -133,17 +133,17 @@ function compareArrays(str, arr) {
     {
         // do nothing for now
     }
+    else if ((str.match(/ /g) || []).length == 1)
+    {
+        if($('input[name=r_product]:checked').val() != undefined)
+            arr = arr + " " + $('input[name=r_product]:checked').val().toLowerCase();
+    }
     else if ((str.match(/ /g) || []).length == 2)
     {
         if($('input[name=r_product]:checked').val() != undefined)
             arr = arr + " " + $('input[name=r_product]:checked').val().toLowerCase();
         if($('input[name=r_users]:checked').val().toLowerCase() != undefined)
             arr = arr + " " + $('input[name=r_users]:checked').val().toLowerCase();
-    }
-    else if ((str.match(/ /g) || []).length == 1)
-    {
-        if($('input[name=r_product]:checked').val() != undefined)
-            arr = arr + " " + $('input[name=r_product]:checked').val().toLowerCase();
     }
     return _.isEqual(str.split(" ").sort(), arr.split(" ").sort())
 

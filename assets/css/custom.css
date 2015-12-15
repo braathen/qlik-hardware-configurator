@@ -5,6 +5,19 @@
 	display: inline !important;
 }
 
+#container-data {
+	width:21cm;
+	/*height:29.7cm;*/
+}
+
+@media all {
+	.page-break	{ display: none; }
+}
+
+@media print {
+	.page-break	{ display: block; page-break-before: always; }
+}
+
 table { 
 color: #333; /* Lighten up font color */
 font-family: Helvetica, Arial, sans-serif; /* Nicer font */
