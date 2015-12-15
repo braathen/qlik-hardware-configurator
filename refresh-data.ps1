@@ -4,6 +4,7 @@ $config_data = "https://docs.google.com/spreadsheets/d/1DHz86iUMtQNFc6jAPTXspJTF
 $current = Split-Path -Parent $PSCommandPath
 
 Try {
+    Write-Host "`nDownloading data..."
     New-Item -ItemType Directory -Force -Path "$current\assets\data" | Out-Null
 
     $wc = New-Object System.Net.WebClient
@@ -25,12 +26,21 @@ Try {
 #            $a = Invoke-WebRequest -Uri $l.Url -UseBasicParsing
 #            $a = Invoke-WebRequest -Uri $l.Url -UseBasicParsing -ContentType "text/html; charset=utf-8"
 #            $a = Read-HtmlPage $l.Url $l.Url
-            $a = $wc.DownloadString($l.Url + "?embedded=true")  
+            $a = $wc.DownloadString($l.Url + "?embedded=true")
 
             $a = $a -replace '(?s)^.*</style>|<div id="footer">.*$', ''
 
             $a = $a -replace '(?s)^.*<body.*?>|</body>.*$', ''
 
+            # clean up c2 c3 etc
+            #([regex]'(?s) class=\".*?\"').Matches($a) | ForEach-Object {Write-Host $_ }
+
+            # remove spans
+            ([regex]'(?s)<span.*?>|</span>').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
+#            Foreach ($i in $span)
+#            {
+#                $a = $a.Replace($i, '')
+#            }
 
 #           Out-File -inputobject $a -filepath "assets/data/tmpdirty.html"
 

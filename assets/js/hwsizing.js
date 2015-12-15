@@ -200,10 +200,16 @@ function getText(tags) {
         t = t.replace(result[0], "<strong>" + result[1] + "</strong>");
     }
 
-    // "" for italic text
+    // :: for italic text
     var regex = /\:{2}(.*?)\:{2}/g
     while(result = regex.exec(t)) {
         t = t.replace(result[0], "<em>" + result[1] + "</em>");
+    }
+
+    // ;; for smaller text
+    var regex = /\;{2}(.*?)\;{2}/g
+    while(result = regex.exec(t)) {
+        t = t.replace(result[0], "<smaller>" + result[1] + "</smaller>");
     }
 
     // insert recommendation table
