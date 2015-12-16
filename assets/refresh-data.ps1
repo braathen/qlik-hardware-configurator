@@ -38,7 +38,7 @@ Try {
             $src = ([regex]'(?s)src="(.*?)"').Matches($a) | ForEach-Object { $_.Groups[1].Value}
             Foreach ($i in $src)
             {
-                $new = "$current/data/" + $i.substring($i.length - 15, 15)
+                $new = "data/" + $i.substring($i.length - 15, 15)
                 $a = $a -replace $i, $new
                 Invoke-WebRequest -Uri $i -UseBasicParsing -OutFile $new
             }
