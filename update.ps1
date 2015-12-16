@@ -10,7 +10,7 @@ $current = Split-Path -Parent $PSCommandPath
 
     Write-Host "Updating application..."
 
-    Remove-Item -Recurse -Force "$current\assets\*" | Out-Null
+    Remove-Item -Recurse -Force "$current\assets" | Out-Null
     Remove-Item -Recurse -Force "$current\index.html" | Out-Null
     Remove-Item -Recurse -Force "$current\update.ps1" | Out-Null
 
