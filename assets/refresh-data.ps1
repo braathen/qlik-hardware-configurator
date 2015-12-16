@@ -12,7 +12,7 @@ Try {
 
 	# Data configuration
     $data = "var sizingData = " + ($wc.DownloadString($config_data) | ConvertFrom-Csv -Delimiter ',' | ConvertTo-Json -Compress | Out-String)
-	#Out-File -inputobject $data -filepath "$current/data/config_data.js"
+	Out-File -inputobject $data -filepath "$current/data/config_data.js"
 
     $lang = ($wc.DownloadString($config_language) | ConvertFrom-Csv -Delimiter ',')
 
