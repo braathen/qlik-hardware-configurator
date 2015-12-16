@@ -1,12 +1,14 @@
 $current = Split-Path -Parent $PSCommandPath
 
-Write-Host "This script will update the entire application to the latest version and refresh the data.`n"
+#Write-Host "This script will update the entire application to the latest version and refresh the data.`n"
 
-Write-Host "Working directory: $current`n"
+#Write-Host "Working directory: $current`n"
 
-$confirmation = Read-Host "WARNING: Continuing will delete ALL files in above directory! [y/N]"
+#$confirmation = Read-Host "WARNING: Continuing will delete ALL files in above directory! [y/N]"
 
-if ($confirmation -eq 'y') {
+#if ($confirmation -eq 'y') {
+
+    Write-Host "Updating application..."
 
     Remove-Item -Recurse -Force "$current\*"
 
@@ -22,5 +24,6 @@ if ($confirmation -eq 'y') {
 
     Remove-Item -Recurse -Force "$current\master.zip"
 
-    &"$current\refresh-data.ps1"
-}
+    &"$current\assets\refresh-data.ps1"
+
+#}
