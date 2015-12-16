@@ -1,31 +1,21 @@
 $current = Split-Path -Parent $PSCommandPath
 
-#Write-Host "This script will update the entire application to the latest version and refresh the data.`n"
+Write-Host "Updating application..."
 
-#Write-Host "Working directory: $current`n"
+Remove-Item -Recurse -Force "$current\assets" | Out-Null
+Remove-Item -Recurse -Force "$current\index.html" | Out-Null
+Remove-Item -Recurse -Force "$current\update.ps1" | Out-Null
 
-#$confirmation = Read-Host "WARNING: Continuing will delete ALL files in above directory! [y/N]"
+Invoke-WebRequest -Uri "https://github.com/braathen/qlik-hardware-configurator/archive/master.zip" -UseBasicParsing -OutFile "./master.zip"
 
-#if ($confirmation -eq 'y') {
+Add-Type -assembly "system.io.compression.filesystem"
 
-    Write-Host "Updating application..."
+[io.compression.zipfile]::ExtractToDirectory($current + "/master.zip", $current)
 
-    Remove-Item -Recurse -Force "$current\assets" | Out-Null
-    Remove-Item -Recurse -Force "$current\index.html" | Out-Null
-    Remove-Item -Recurse -Force "$current\update.ps1" | Out-Null
+Move-Item "$current/qlik-hardware-configurator-master/*" -Force
 
-    Invoke-WebRequest -Uri "https://github.com/braathen/qlik-hardware-configurator/archive/master.zip" -UseBasicParsing -OutFile "./master.zip"
+Remove-Item -Recurse -Force "$current\qlik-hardware-configurator-master"
 
-    Add-Type -assembly "system.io.compression.filesystem"
+Remove-Item -Recurse -Force "$current\master.zip"
 
-    [io.compression.zipfile]::ExtractToDirectory($current + "/master.zip", $current)
-
-    Move-Item "$current/qlik-hardware-configurator-master/*" -Force
-
-    Remove-Item -Recurse -Force "$current\qlik-hardware-configurator-master"
-
-    Remove-Item -Recurse -Force "$current\master.zip"
-
-    &"$current\assets\refresh-data.ps1"
-
-#}
+&"$current\assets\refresh-data.ps1"
