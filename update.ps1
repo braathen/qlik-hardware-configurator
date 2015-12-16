@@ -10,7 +10,9 @@ $current = Split-Path -Parent $PSCommandPath
 
     Write-Host "Updating application..."
 
-    Remove-Item -Recurse -Force "$current\*"
+    Remove-Item -Recurse -Force "$current\assets\*"
+    Remove-Item -Recurse -Force "$current\index.html"
+    Remove-Item -Recurse -Force "$current\udpate.ps1"
 
     Invoke-WebRequest -Uri "https://github.com/braathen/qlik-hardware-configurator/archive/master.zip" -UseBasicParsing -OutFile "./master.zip"
 
