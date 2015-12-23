@@ -38,7 +38,7 @@ Try {
             $src = ([regex]'(?s)src="(.*?)"').Matches($a) | ForEach-Object { $_.Groups[1].Value}
             Foreach ($i in $src)
             {
-                $new = "assets/data/" + $i.substring($i.length - 15, 15)
+                $new = "data/" + $i.substring($i.length - 15, 15)
                 $a = $a -replace $i, $new
                 Invoke-WebRequest -Uri $i -UseBasicParsing -OutFile $new
             }
@@ -56,7 +56,7 @@ Try {
 
 }
 Catch [system.exception] {
-	Write-Host "`nAn error occured, try again later`n"
+    Write-Host "`nERROR:" $_.Exception.Message "`n"
     Write-Host "Press any key to continue ..."
 
     $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | Out-Null
