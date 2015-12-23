@@ -1,5 +1,5 @@
 var options = {};
-var platform = ['Physical', 'Virtual', 'AWS'];
+var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
 var x_physical = false;
 var x_virtual = false;
 var x_aws = false;
@@ -157,6 +157,7 @@ function getText(tags) {
     x_physical = $('input[name="chk_Physical"]').is(':checked');
     x_virtual = $('input[name="chk_Virtual"]').is(':checked');
     x_aws = $('input[name="chk_AWS"]').is(':checked');
+    x_azure = $('input[name="chk_Azure"]').is(':checked');
     x_sense = $('input[name=r_product]:checked').val() == "Sense";
     x_qlikview = $('input[name=r_product]:checked').val() == "QlikView";
 
@@ -270,7 +271,7 @@ $(document).ready(function(e){
     });
 
     $("#container-hardware").html(function() {
-        var platform = ['Physical', 'Virtual', 'AWS'];
+        var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
         var t = "";
         platform.forEach(function(item) {
             t = t + '<div id="table-wrapper-' + item + '">' +
