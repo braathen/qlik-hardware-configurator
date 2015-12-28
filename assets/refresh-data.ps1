@@ -39,6 +39,9 @@ Try {
             # remove spans
             ([regex]'(?s)<span.*?>|</span>').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
 
+            # remove google links
+            ([regex]'(?s)https:\/\/www.google.com\/url\?q=').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
+
             # Download images
             $src = ([regex]'(?s)src="(.*?)"').Matches($a) | ForEach-Object { $_.Groups[1].Value}
             Foreach ($i in $src)
