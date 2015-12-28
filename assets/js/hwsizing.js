@@ -1,5 +1,6 @@
 var options = {};
-var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
+//var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
+var platform = _.uniq(_.map(sizingData, 'Platform'));
 var x_physical = false;
 var x_virtual = false;
 var x_aws = false;
@@ -7,7 +8,7 @@ var x_qlikview = false;
 var x_sense = false;
 var x_product = "";
 
-$("input:radio, input:checkbox").change(function () {    
+$("input:radio, input:checkbox").change(function () {
 
     var current = this.name.replace('chk_','');
     if (platform.indexOf(current) >= 0)
@@ -73,7 +74,8 @@ $("input:radio, input:checkbox").change(function () {
             renderData = clonedArray.filter(function(item) {
                 if (item.Type == "Central" && ($('input[name=r_product]:checked').val() == "QlikView")) return null;
                 if (item.Optional == "yes" && !$('input[name=chk_options]:checked').val()) return null;
-                return item.Sizing == $('input[name=r_users]:checked').val() && item.Platform == p;
+                if (item.Platform != p || !$('input[name=chk_' + p + ']:checked').val()) return null;
+                return item.Sizing == $('input[name=r_users]:checked').val();
             });
 
             var x = uniq(renderData);
@@ -85,11 +87,6 @@ $("input:radio, input:checkbox").change(function () {
                     defaultSortOrder: 1
             });
         });
-
-
-        //_.result(_.find(languageData, function(chr) {
-        //  return chr.age < 40;
-        //}), 'user');
 
         // update variables
         _.find(languageData, { 'Tags': "x_users" }).Text= $('input[name=r_users]:checked').val().toLowerCase();
@@ -146,9 +143,6 @@ function compareArrays(str, arr) {
             arr = arr + " " + $('input[name=r_users]:checked').val().toLowerCase();
     }
     return _.isEqual(str.split(" ").sort(), arr.split(" ").sort())
-
-//    else if (str.indexOf(" ") > -1)
-
 }
 
 function getText(tags) {
@@ -177,7 +171,7 @@ function getText(tags) {
     // no match
     if(x == undefined)
     {
-        console.log(tags);
+        //console.log(tags);
         return "[NOT IMPLEMENTED YET]";
     }
 
@@ -253,6 +247,7 @@ var rowTemplate = '<tr>' +
 //Initialize page
 $(document).ready(function(e){
 
+
     languageData.push({"Language":"en-US", "Tags":"x_platform", "Text": btoa(""), "Url": ""});
     languageData.push({"Language":"en-US", "Tags":"x_users", "Text": btoa(""), "Url": ""});
     languageData.push({"Language":"en-US", "Tags":"x_users_no", "Text": btoa(""), "Url": ""});
@@ -271,11 +266,12 @@ $(document).ready(function(e){
     });
 
     $("#container-hardware").html(function() {
-        var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
+        //var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
+        var platform = _.uniq(_.map(sizingData, 'Platform'));
         var t = "";
         platform.forEach(function(item) {
             t = t + '<div id="table-wrapper-' + item + '">' +
-                        '<h5>' + item + '</h5>' +
+                        '<h5>' + item + ' Environment</h5>' +
                         '<table class="table table-striped">' +
                             '<thead>' +
                                 '<tr>' +
@@ -293,7 +289,39 @@ $(document).ready(function(e){
         return t;
     });
 
+
+/*    $("#sidebar-platform").html(function() {
+        //var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
+        var platform = _.uniq(_.map(sizingData, 'Platform'));
+        var t = "";
+        platform.forEach(function(item) {
+            t = t + '<label class="btn active">' +
+                    '<input type="checkbox" name="chk_' + item + '" checked><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i> <span>  ' + item + '</span>' +
+                    '</label>';
+        });
+        return t;
+    });*/
+
+    /*$("#sidebar-platform").html("");
+    var platform = _.uniq(_.map(sizingData, 'Platform'));
+    platform.forEach(function(item) {
+        addCheckbox(item);
+    });*/
+       
+
 });
+
+function addCheckbox(name) {
+   var container = $('#sidebar-platform');
+   var inputs = container.find('input');
+   var id = inputs.length+1;
+
+   $('<label />', { class: 'btn active', id: 'lbl_' + name }).appendTo(container);
+   $('<input />', { type: 'checkbox', name: 'chk_'+ name, checked: 'checked' }).appendTo($('#lbl_' + name));
+   $('<i />', { class: 'fa fa-square-o fa-2x' }).appendTo($('#lbl_' + name));
+   $('<i />', { class: 'fa fa-check-square-o fa-2x' }).appendTo($('#lbl_' + name));
+   $('<span>  ' + name + '</span>').appendTo($('#lbl_' + name));
+}
 
 function uniq(a) {
     _(a).forEach(function(n) {
