@@ -42,7 +42,7 @@ Try {
 
             # remove google links
             ([regex]'(?s)https:\/\/www.google.com\/url\?q=').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
-            ([regex]'(?s)&sa.*?\)').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
+            ([regex]'(?s)(&sa.*?)\)').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
 
             # Download images
             $src = ([regex]'(?s)src="(.*?)"').Matches($a) | ForEach-Object { $_.Groups[1].Value}
