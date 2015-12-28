@@ -1,7 +1,8 @@
 $current = Split-Path -Parent $PSCommandPath
 
 if ($PSVersionTable.PSVersion.Major -lt 3) {
-    Write-Host "Please upgrade PowerShell to latest version..."
+    Write-Host "`nPlease upgrade PowerShell to latest version...`n"
+    Write-Host "https://www.microsoft.com/en-us/download/details.aspx?id=50395`n"
     return
 }
 
