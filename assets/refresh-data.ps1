@@ -3,6 +3,11 @@ $config_data = "https://docs.google.com/spreadsheets/d/1DHz86iUMtQNFc6jAPTXspJTF
 
 $current = Split-Path -Parent $PSCommandPath
 
+if ($PSVersionTable.PSVersion.Major -lt 3) {
+    Write-Host "Please upgrade PowerShell to latest version..."
+    return
+}
+
 Try {
     Write-Host "`nDownloading data..."
     New-Item -ItemType Directory -Force -Path "$current\data" | Out-Null

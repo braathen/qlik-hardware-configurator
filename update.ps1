@@ -1,5 +1,10 @@
 $current = Split-Path -Parent $PSCommandPath
 
+if ($PSVersionTable.PSVersion.Major -lt 3) {
+    Write-Host "Please upgrade PowerShell to latest version..."
+    return
+}
+
 Write-Host "Updating application..."
 
 If (Test-Path "$current\assets") {
