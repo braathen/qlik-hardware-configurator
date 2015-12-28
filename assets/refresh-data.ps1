@@ -2,7 +2,6 @@ $config_language = "https://docs.google.com/spreadsheets/d/18GG6fMRb9AlFSY4SVesT
 $config_data = "https://docs.google.com/spreadsheets/d/1DHz86iUMtQNFc6jAPTXspJTFjUVEK4613eNQLrCrV2c/pub?output=csv"
 
 $current = Split-Path -Parent $PSCommandPath
-Write-Host $current
 
 Try {
     Write-Host "`nDownloading data..."
