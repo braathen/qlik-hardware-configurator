@@ -35,14 +35,15 @@ Try {
             $a = $a -replace '(?s)^.*</title>', ''
 
             # clean up c2 c3 etc - causes a conflict with variables for some reason...
-            #([regex]'(?s) class=\".*?\"').Matches($a) | ForEach-Object {Write-Host $_ }
+#            ([regex]'(?s) class=\".*?\"').Matches($a) | ForEach-Object {Write-Host $_ }
+            #([regex]'(?s) class=\"c.*?\"').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
 
             # remove spans
             ([regex]'(?s)<span.*?>|</span>').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
 
             # remove google links
             ([regex]'(?s)https:\/\/www.google.com\/url\?q=').Matches($a) | ForEach-Object { $a = $a.Replace($_,'') }
-            ([regex]'(?s)&sa.*?\)').Matches($a) | ForEach-Object { $a = $a.Replace($_,')') }
+            ([regex]'(?s)&amp;sa.*?\"').Matches($a) | ForEach-Object { $a = $a.Replace($_,'"') }
 
             # Download images
             $src = ([regex]'(?s)src="(.*?)"').Matches($a) | ForEach-Object { $_.Groups[1].Value}
