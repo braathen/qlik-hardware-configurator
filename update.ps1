@@ -26,6 +26,8 @@ Add-Type -assembly "system.io.compression.filesystem"
 
 Move-Item "$current/qlik-hardware-configurator-master/*" -Force
 
+Remove-Item -Recurse -Force "$current\.gitignore"
+
 Remove-Item -Recurse -Force "$current\qlik-hardware-configurator-master"
 
 Remove-Item -Recurse -Force "$current\master.zip"
