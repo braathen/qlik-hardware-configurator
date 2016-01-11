@@ -33,6 +33,10 @@ If (Test-Path "$current\.gitignore") {
     Remove-Item -Recurse -Force "$current\.gitignore"
 }
 
+If (Test-Path "$current\.DS_Store") {
+    Remove-Item -Recurse -Force "$current\.DS_Store"
+}
+
 Remove-Item -Recurse -Force "$current\qlik-hardware-configurator-master"
 
 Remove-Item -Recurse -Force "$current\master.zip"
