@@ -271,7 +271,7 @@ $(document).ready(function(e){
         var t = "";
         platform.forEach(function(item) {
             t = t + '<div id="table-wrapper-' + item + '">' +
-                        '<h5>' + item + ' Environment</h5>' +
+                        '<strong>' + item + ' Environment</strong>' +
                         '<table class="table table-striped">' +
                             '<thead>' +
                                 '<tr>' +
