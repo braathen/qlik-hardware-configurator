@@ -58,8 +58,8 @@ Try {
             Foreach ($i in $src)
             {
                 $tmpname = $i.substring($i.length - 15, 15)
-                $a = $a -replace $i, "assets/data/$tmpname"
-                $wc.DownloadFile($i, "$current\data\$tmpname")
+                $a = $a -replace $i, "/assets/data/$tmpname.png"
+                $wc.DownloadFile($i, "$current\data\$tmpname.png")
                 #Invoke-WebRequest -Uri $i -UseBasicParsing -OutFile "$current\data\$tmpname"
                 Write-Host -NoNewline "."
             }
