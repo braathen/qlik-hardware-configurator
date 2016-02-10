@@ -11,6 +11,14 @@ $wc.Encoding = [System.Text.Encoding]::UTF8
 
 Write-Host "Updating application..."
 
+$wc.DownloadFile("https://bit.ly/qhc-update", "$current\master.zip")
+
+Add-Type -assembly "system.io.compression.filesystem"
+
+[io.compression.zipfile]::ExtractToDirectory($current + "/master.zip", $current)
+
+&"$current\qlik-hardware-configurator-master\assets\refresh-data.ps1"
+
 If (Test-Path "$current\assets") {
     Remove-Item -Recurse -Force "$current\assets" | Out-Null
 }
@@ -20,12 +28,6 @@ If (Test-Path "$current\index.html") {
 If (Test-Path "$current\update.ps1") {
     Remove-Item -Recurse -Force "$current\update.ps1" | Out-Null
 }
-
-$wc.DownloadFile("https://bit.ly/qhc-update", "$current\master.zip")
-
-Add-Type -assembly "system.io.compression.filesystem"
-
-[io.compression.zipfile]::ExtractToDirectory($current + "/master.zip", $current)
 
 Move-Item "$current/qlik-hardware-configurator-master/*" -Force
 
@@ -40,5 +42,3 @@ If (Test-Path "$current\.DS_Store") {
 Remove-Item -Recurse -Force "$current\qlik-hardware-configurator-master"
 
 Remove-Item -Recurse -Force "$current\master.zip"
-
-&"$current\assets\refresh-data.ps1"
