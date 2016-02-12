@@ -248,10 +248,10 @@ var rowTemplate = '<tr>' +
 $(document).ready(function(e){
 
 
-    languageData.push({"Language":"en-US", "Tags":"x_platform", "Text": btoa(""), "Url": ""});
-    languageData.push({"Language":"en-US", "Tags":"x_users", "Text": btoa(""), "Url": ""});
-    languageData.push({"Language":"en-US", "Tags":"x_users_no", "Text": btoa(""), "Url": ""});
-    languageData.push({"Language":"en-US", "Tags":"x_product", "Text": btoa(""), "Url": ""});
+    languageData.push({"Language":"en-us", "Tags":"x_platform", "Text": btoa(""), "Url": ""});
+    languageData.push({"Language":"en-us", "Tags":"x_users", "Text": btoa(""), "Url": ""});
+    languageData.push({"Language":"en-us", "Tags":"x_users_no", "Text": btoa(""), "Url": ""});
+    languageData.push({"Language":"en-us", "Tags":"x_product", "Text": btoa(""), "Url": ""});
 
 /*    $("#container-disclaimer").html(function() {
         return getText("disclaimer");
