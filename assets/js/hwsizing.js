@@ -162,18 +162,18 @@ function getText(tags) {
 
     // get text for language
     var x = _.find(languageData, function(item) {
-        console.log(navigator.language.toLowerCase());
-        var y = item.Language == navigator.language.toLowerCase() && compareArrays(item.Tags, tags);
-        console.log(y);
-        if (y !== undefined)
-            return y;
+        //console.log(navigator.language.toLowerCase());
+        // navigator.language.toLowerCase()
+        //var y = item.Language == 'en-us' && compareArrays(item.Tags, tags);
+        //if (y !== undefined)
+        //    return y;
         return item.Language == 'en-us' && compareArrays(item.Tags, tags);
     });
 
     // no match
     if(x == undefined)
     {
-        console.log(tags);
+        //console.log(tags);
         return "[NOT IMPLEMENTED YET]";
     }
 
