@@ -162,10 +162,10 @@ function getText(tags) {
 
     // get text for language
     var x = _.find(languageData, function(item) {
-        var y = item.Language == navigator.language && compareArrays(item.Tags, tags);
+        var y = item.Language == navigator.language.toLowerCase() && compareArrays(item.Tags, tags);
         if (y !== undefined)
             return y;
-        return item.Language == 'en-US' && compareArrays(item.Tags, tags);
+        return item.Language == 'en-us' && compareArrays(item.Tags, tags);
     });
 
     // no match
