@@ -14,6 +14,11 @@ body {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+#sidebar-content .row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 .table {
 	width: 80%;
 	max-width: 80%;
