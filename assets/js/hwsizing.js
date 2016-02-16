@@ -291,10 +291,11 @@ $(document).ready(function(e){
         return t;
     });
 
-    // deselect checkbox hack, exclude IE...
+    // deselect checkbox hack,
     var ua = window.navigator.userAgent;
     var msie = ua.indexOf("MSIE ");
-    if (msie < 0 || navigator.userAgent.match(/Trident.*rv\:11\./))
+    console.log(msie);
+    if (msie < 0)
     {
         $('input[type="checkbox"]').each(function() {
             if ($(this).is(":checked") && this.name != 'chk_options') {
