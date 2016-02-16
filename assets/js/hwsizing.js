@@ -291,15 +291,20 @@ $(document).ready(function(e){
         return t;
     });
 
-    // deselect checkbox hack
-    $('input[type="checkbox"]').each(function() {
-        if ($(this).is(":checked") && this.name != 'chk_options') {
-            //$(this).trigger("click");
-            $(this).click();
-            $(this).prop("checked", false );
-            $(this).attr("checked", false );
-        }
-    });
+    // deselect checkbox hack, exclude IE...
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    if (msie < 0 || navigator.userAgent.match(/Trident.*rv\:11\./))
+    {
+        $('input[type="checkbox"]').each(function() {
+            if ($(this).is(":checked") && this.name != 'chk_options') {
+                //$(this).trigger("click");
+                $(this).click();
+                $(this).prop("checked", false );
+                $(this).attr("checked", false );
+            }
+        });
+    }
 
 
 /*    $("#sidebar-platform").html(function() {
