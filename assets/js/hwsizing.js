@@ -294,8 +294,9 @@ $(document).ready(function(e){
     // deselect checkbox hack
     $('input[type="checkbox"]').each(function() {
         if ($(this).is(":checked") && this.name != 'chk_options') {
-            $(this).prop("checked", false );
             $(this).trigger("click");
+            $(this).prop("checked", false );
+            $(this).attr("checked", false );
         }
     });
 
