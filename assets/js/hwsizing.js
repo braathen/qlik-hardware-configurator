@@ -292,17 +292,21 @@ $(document).ready(function(e){
     });
 
     // deselect checkbox hack...
-/*
-    $('input[type="checkbox"]').each(function() {
-        if ($(this).is(":checked") && this.name != 'chk_options') {
-            //$(this).trigger("click");
-            $(this).click();
-            $(this).prop("checked", false );
-            $(this).attr("checked", false );
-        }
-    });
-*/
-
+    var parser = new UAParser();
+    var result = parser.getResult()
+    var name = result.browser.name;
+    console.log(name);
+    console.log(parser.getResult());
+    if (name == "Chrome") {
+        $('input[type="checkbox"]').each(function() {
+            if ($(this).is(":checked") && this.name != 'chk_options') {
+                //$(this).trigger("click");
+                $(this).click();
+                $(this).prop("checked", false );
+                $(this).attr("checked", false );
+            }
+        });
+    }
 /*    $("#sidebar-platform").html(function() {
         //var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
         var platform = _.uniq(_.map(sizingData, 'Platform'));
