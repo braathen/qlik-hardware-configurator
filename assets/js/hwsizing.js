@@ -291,22 +291,17 @@ $(document).ready(function(e){
         return t;
     });
 
-    // deselect checkbox hack,
-    var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE ");
-    console.log(msie);
-    if (msie < 0)
-    {
-        $('input[type="checkbox"]').each(function() {
-            if ($(this).is(":checked") && this.name != 'chk_options') {
-                //$(this).trigger("click");
-                $(this).click();
-                $(this).prop("checked", false );
-                $(this).attr("checked", false );
-            }
-        });
-    }
-
+    // deselect checkbox hack...
+/*
+    $('input[type="checkbox"]').each(function() {
+        if ($(this).is(":checked") && this.name != 'chk_options') {
+            //$(this).trigger("click");
+            $(this).click();
+            $(this).prop("checked", false );
+            $(this).attr("checked", false );
+        }
+    });
+*/
 
 /*    $("#sidebar-platform").html(function() {
         //var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
