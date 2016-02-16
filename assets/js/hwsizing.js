@@ -291,6 +291,14 @@ $(document).ready(function(e){
         return t;
     });
 
+    // deselect checkbox hack
+    $('input[type="checkbox"]').each(function() {
+        if ($(this).is(":checked") && this.name != 'chk_options') {
+            $(this).prop("checked", false );
+            $(this).trigger("click");
+        }
+    });
+
 
 /*    $("#sidebar-platform").html(function() {
         //var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
