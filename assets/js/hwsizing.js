@@ -293,17 +293,14 @@ $(document).ready(function(e){
 
     // deselect checkbox hack...
     var parser = new UAParser();
-    var result = parser.getResult()
-    var name = result.browser.name;
-    console.log(name);
-    console.log(parser.getResult());
+    var name = parser.getResult().browser.name
     if (name == "Chrome") {
         $('input[type="checkbox"]').each(function() {
             if ($(this).is(":checked") && this.name != 'chk_options') {
                 //$(this).trigger("click");
                 $(this).click();
-                $(this).prop("checked", false );
-                $(this).attr("checked", false );
+                $(this).prop("checked", false);
+                $(this).attr("checked", false);
             }
         });
     }
@@ -364,12 +361,18 @@ function uniq(a) {
 
 String.prototype.checkPlatform = function() {
     if ($('input[name=r_product]:checked').val() == "QlikView") {
-        if (this == "PUB/Scheduler") return "QlikView Publisher (QVP)";
-        if (this == "QVS/Engine") return "QlikView Server (QVS)";
+        if (this == "PUB/Scheduler") return "QlikView Publisher";
+        if (this == "QVS/Engine") return "QlikView Server";
     } else {
-        if (this == "PUB/Scheduler") return "Qlik Sense Scheduler (QSS)";
-        if (this == "QVS/Engine") return "Qlik Sense Engine (QES)";
-        if (this == "Central") return "Qlik Sense Central";
+        if ($('input[name=r_users]:checked').val().toLowerCase() == "large") {
+            if (this == "PUB/Scheduler") return "Qlik Sense Scheduler";
+            if (this == "QVS/Engine") return "Qlik Sense Engine";
+            if (this == "Central") return "Qlik Sense Central";
+        } else {
+            if (this == "PUB/Scheduler") return "Qlik Sense Central + Scheduler";
+            if (this == "QVS/Engine") return "Qlik Sense Engine";
+            if (this == "Central") return "Qlik Sense Central";
+        }
     }
     return this;
 };
