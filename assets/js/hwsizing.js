@@ -365,13 +365,12 @@ String.prototype.checkPlatform = function() {
         if (this == "QVS/Engine") return "QlikView Server";
     } else {
         if ($('input[name=r_users]:checked').val().toLowerCase() == "large") {
-            if (this == "PUB/Scheduler") return "Qlik Sense Scheduler";
-            if (this == "QVS/Engine") return "Qlik Sense Engine";
+            if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
+            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
             if (this == "Central") return "Qlik Sense Central Node";
         } else {
-            if (this == "PUB/Scheduler") return "Qlik Sense Central Node (including Scheduler)";
-            if (this == "QVS/Engine") return "Qlik Sense Engine";
-            if (this == "Central") return "Qlik Sense Central Node";
+            if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
+            if (this == "QVS/Engine") return "Qlik Sense Central Node";
         }
     }
     return this;
