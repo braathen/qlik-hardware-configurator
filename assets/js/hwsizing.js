@@ -369,8 +369,8 @@ String.prototype.checkPlatform = function() {
             if (this == "QVS/Engine") return "Qlik Sense Rim Node";
             if (this == "Central") return "Qlik Sense Central Node";
         } else {
-            if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
-            if (this == "QVS/Engine") return "Qlik Sense Central Node";
+            if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
+            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
         }
     }
     return this;
