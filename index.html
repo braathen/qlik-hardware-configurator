@@ -134,7 +134,7 @@
 
                 <div class="qlik-printable qlik-toggled">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" style="width: 850px;">
                             <h4>1. Suggested Hardware Specification</h4>
                             <p>This is the hardware suggested according to your choises. Make sure to only select the platforms that are relevant for the customer.</p>
                         </div>
@@ -179,10 +179,23 @@
                     </div>
 -->
                 <div class="qlik-printable qlik-toggled">
+
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h4>2. Generate Sizing Report</h4>
-                            <p>When configuration is done and the resulting suggestions seems appropriate, click the button below to generate a sizing report.<br>This report can be used as a starting point for your own modification and addendum or sent directly to customers.</p>
+                        <div class="col-lg-12" style="width: 850px;">
+                            <h4>2. Salesforce Opportunity</h4>
+                            <p>Enter the Salesforce opportunity url before proceeding so that we can keep track of customers/prospects who are handed these reports and for what cases the tool is being utilized.</p>
+                            <div class="input-group" style="width: 425px;">
+                              <span class="input-group-addon" id="sfdcurl">SFDC Url</span>
+                              <input type="text" class="form-control" id="sfdcurltext" placeholder="https://eu1.salesforce.com/006D000000ithOO" aria-describedby="sizing-addon2">
+                            </div>
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12" style="width: 850px;">
+                            <h4>3. Generate Sizing Report</h4>
+                            <p>When configuration is done and the resulting suggestions seems appropriate, click the button below to generate a sizing report. This report can be used as a starting point for your own modification and addendum or sent directly to customers.</p>
                             <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Generate Sizing Report</a>
                         </div>
                     </div>
@@ -205,6 +218,11 @@
     <!-- Menu Toggle Script -->
     <script>
     $("#menu-toggle").click(function(e) {
+        var sfdcurl = $('#sfdcurltext').val();
+        if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i)) {
+          alert("Not a valid Salesforce opportunity url, try again!");
+          return
+        } 
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $(".qlik-printable").toggleClass("qlik-toggled");
