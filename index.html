@@ -222,7 +222,17 @@
         if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i)) {
           alert("Not a valid Salesforce opportunity url, try again!");
           return
-        } 
+        }
+        $.ajax({
+          url:"http://sizing.qliktech.com/assets/log/qhclogger.asmx/Log",
+          type:"POST",
+          data:"userid=Anonymous&url=" + sfdcurl,
+          contentType:"application/x-www-form-urlencoded",
+          dataType:"xml",
+          success: function(result){
+              //console.log(result);
+          }
+        });
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $(".qlik-printable").toggleClass("qlik-toggled");
