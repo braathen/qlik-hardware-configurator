@@ -219,7 +219,7 @@
     <script>
     $("#menu-toggle").click(function(e) {
         var sfdcurl = $('#sfdcurltext').val();
-        if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i)) {
+        if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i) && sfdcurl.toLowerCase() != "gear") {
           alert("Not a valid Salesforce opportunity url, try again!");
           return
         }
