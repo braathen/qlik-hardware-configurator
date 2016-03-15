@@ -11,7 +11,7 @@ public class QHCLogger : WebService
    public bool Log(string userid, string url)
    {
 	try {
-		using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\websites\qlik-hardware-configurator\assets\log\logfile.txt", true))
+		using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\websites\qlik-hardware-configurator-logs\logfile.txt", true))
         	{
             		file.WriteLine(DateTime.Now + "," + userid + "," + url);
 	        }
