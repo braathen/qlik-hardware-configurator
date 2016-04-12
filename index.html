@@ -224,7 +224,7 @@
     <script>
     $("#menu-toggle").click(function(e) {
         var sfdcurl = $('#sfdcurltext').val();
-        if (sfdcurl.toLowerCase() != "gear" && window.location.port == 80 && window.location.hostname == "sizing.qliktech.com") {
+        if (sfdcurl.toLowerCase() != "gear" && window.location.port == '' && window.location.hostname == "sizing.qliktech.com") {
           if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i)) {
             alert("Not a valid Salesforce opportunity/account url, try again!");
             return
