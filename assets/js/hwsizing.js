@@ -44,7 +44,9 @@ $("input:radio, input:checkbox").change(function () {
                 $('#optional').text(' High availability');
                 break;
             case "large":
-                $('#optionalCheckbox').hide();
+                $('#optionalCheckbox').show();
+                $('#optional').text(' High data volume');
+                //$('#optionalCheckbox').hide();
                 break;
         }
     }
