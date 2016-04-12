@@ -24,6 +24,11 @@ body {
 	max-width: 80%;
 }
 
+.feedback a:hover {
+    text-decoration: none;
+	color: #7AA3CC !important;
+}
+
 @media all {
 	.page-break	{ display: none; }
 }

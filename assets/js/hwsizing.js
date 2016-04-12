@@ -45,7 +45,7 @@ $("input:radio, input:checkbox").change(function () {
                 break;
             case "large":
                 $('#optionalCheckbox').show();
-                $('#optional').text(' High data volume');
+                $('#optional').text(' High refresh rate');
                 //$('#optionalCheckbox').hide();
                 break;
         }

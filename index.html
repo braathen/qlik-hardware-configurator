@@ -108,10 +108,15 @@
           <input type="checkbox" name='chk_options'><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i> <span id="optional"> High availability</span>
         </label>
       </div>
-
-
     </div>
-  </div>
+</div>
+
+
+<div class="feedback" style="margin-left: 20px; font-size: small;"><br><br><br>
+<a href="https://confluence.qliktech.com/x/7mpgAw" style="color: #c8c8c8;">
+          <span class="glyphicon glyphicon-comment"></span> Please give your feedback in the comment field on Confluence.
+        </a> 
+</div>
 
 </div>
 
@@ -219,20 +224,22 @@
     <script>
     $("#menu-toggle").click(function(e) {
         var sfdcurl = $('#sfdcurltext').val();
-        if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i) && sfdcurl.toLowerCase() != "gear") {
-          alert("Not a valid Salesforce opportunity url, try again!");
-          return
-        }
-        $.ajax({
-          url:"http://sizing.qliktech.com/assets/log/qhclogger.asmx/Log",
-          type:"POST",
-          data:"userid=Anonymous&url=" + sfdcurl,
-          contentType:"application/x-www-form-urlencoded",
-          dataType:"xml",
-          success: function(result){
-              //console.log(result);
+        if (sfdcurl.toLowerCase() != "gear" && window.location.port == 80) {
+          if (!sfdcurl.match(/https?:\/\/.*\.salesforce.com\/.*/i)) {
+            alert("Not a valid Salesforce opportunity/account url, try again!");
+            return
           }
-        });
+          $.ajax({
+            url:"http://sizing.qliktech.com/assets/log/qhclogger.asmx/Log",
+            type:"POST",
+            data:"userid=Anonymous&url=" + sfdcurl,
+            contentType:"application/x-www-form-urlencoded",
+            dataType:"xml",
+            success: function(result){
+                //console.log(result);
+            }
+          });
+        }
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $(".qlik-printable").toggleClass("qlik-toggled");
