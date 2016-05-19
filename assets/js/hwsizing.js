@@ -46,7 +46,6 @@ $("input:radio, input:checkbox").change(function () {
             case "large":
                 $('#optionalCheckbox').show();
                 $('#optional').text(' High refresh rate');
-                //$('#optionalCheckbox').hide();
                 break;
         }
     }
@@ -294,6 +293,7 @@ $(document).ready(function(e){
     });
 
     // deselect checkbox hack...
+    $('#optionalCheckbox').hide();
     var parser = new UAParser();
     var name = parser.getResult().browser.name
     if (name == "Chrome") {
@@ -370,6 +370,9 @@ String.prototype.checkPlatform = function() {
             if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
             if (this == "QVS/Engine") return "Qlik Sense Rim Node";
             if (this == "Central") return "Qlik Sense Central Node";
+        } else if ($('input[name=r_users]:checked').val().toLowerCase() == "small") {
+            if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
+            if (this == "QVS/Engine") return "Qlik Sense Central Node";
         } else {
             if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
             if (this == "QVS/Engine") return "Qlik Sense Rim Node";
