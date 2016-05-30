@@ -69,7 +69,10 @@ $("input:radio, input:checkbox").change(function () {
                 break;
             case "small":
                 $('#optionalCheckbox').show();
-                $('#optional').text(' Intraday refresh');
+                if ($('input[name=r_product]:checked').val() == "QAP")
+                    $('#optional').text(' High availability');
+                else
+                    $('#optional').text(' Intraday refresh');
                 break;
             case "medium":
                 $('#optionalCheckbox').show();
