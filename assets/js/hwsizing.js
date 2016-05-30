@@ -1,12 +1,20 @@
 var options = {};
-//var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
 var platform = _.uniq(_.map(sizingData, 'Platform'));
 var x_physical = false;
 var x_virtual = false;
 var x_aws = false;
 var x_qlikview = false;
 var x_sense = false;
+var x_qap = false;
 var x_product = "";
+
+// fix QAP stuff...
+sizingData.forEach(function(p) {
+    if (p.Type == "QAP") {
+        p.Type = p.CPU.split(':', 1)[0];
+        p.CPU = p.CPU.substring(p.CPU.indexOf(":")+1).trim();
+    }
+});
 
 $("input:radio, input:checkbox").change(function () {
 
@@ -28,6 +36,26 @@ $("input:radio, input:checkbox").change(function () {
         }
     });
 
+    if (current == "r_product")
+    {
+        // if QAP is selected/deselected
+        switch ($('input[name=r_product]:checked').val().toLowerCase()) {
+            case "qap":
+                $('#optionalXSmall').show();
+                break;
+            default:
+                if ($('input[name=r_users]:checked').val() == "XSMALL")
+                {
+                    $('input[name=r_users]').attr('checked', false);
+                    $('input[name=r_users]').prop('checked', false);
+                    $('#optionalXSmall').removeClass('active');
+                    radioCount--;
+                }
+                $('#optionalXSmall').hide();
+                break;
+        }
+    }
+
     if (current == "r_users")
     {
         $('input[name=chk_options]').attr('checked', false);
@@ -35,6 +63,10 @@ $("input:radio, input:checkbox").change(function () {
         $('#l_options').removeClass('active');
 
         switch ($('input[name=r_users]:checked').val().toLowerCase()) {
+            case "xsmall":
+                $('#optionalCheckbox').hide();
+                $('#optional').text('');
+                break;
             case "small":
                 $('#optionalCheckbox').show();
                 $('#optional').text(' Intraday refresh');
@@ -54,26 +86,11 @@ $("input:radio, input:checkbox").change(function () {
     if (radioCount >= 2 && checkboxCount > 0) {
         var clonedArray = JSON.parse(JSON.stringify(sizingData))
 
-/*        $('input[type="checkbox"]').each(function() {
-            if ($(this).is(":checked") && this.name != 'chk_options') {
-                var p = this.name.replace("chk_", "");
-                renderData = clonedArray.filter(function(item) {
-                    if (item.Type == "Central" && ($('input[name=r_product]:checked').val() == "QlikView")) return null;
-                    if (item.Optional == "yes" && !$('input[name=chk_options]:checked').val()) return null;
-                    if (item.Platform != p) return null;
-                console.log(item.Platform + ":" + p);
-                    if (item.Sizing == $('input[name=r_users]:checked').val() && item.Platform == p)
-                        return true;
-                    else
-                        return false;
-                });
-
-            }
-*/
-
         platform.forEach(function(p) {
             renderData = clonedArray.filter(function(item) {
-                if (item.Type == "Central" && ($('input[name=r_product]:checked').val() == "QlikView")) return null;
+                if (item.Type.substring(0, 3) == "QAP" && ($('input[name=r_product]:checked').val() != "QAP")) return null;
+                if (item.Type.substring(0, 3) != "QAP" && ($('input[name=r_product]:checked').val() == "QAP")) return null;
+                if (item.Type == "Central" && ($('input[name=r_product]:checked').val() != "Sense")) return null;
                 if (item.Optional == "yes" && !$('input[name=chk_options]:checked').val()) return null;
                 if (item.Platform != p || !$('input[name=chk_' + p + ']:checked').val()) return null;
                 return item.Sizing == $('input[name=r_users]:checked').val();
@@ -93,6 +110,9 @@ $("input:radio, input:checkbox").change(function () {
         _.find(languageData, { 'Tags': "x_users" }).Text= $('input[name=r_users]:checked').val().toLowerCase();
         switch ($('input[name=r_users]:checked').val().toLowerCase())
         {
+            case "xsmall":
+                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 20");
+                break;
             case "small":
                 _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 200");
                 break;
@@ -104,10 +124,20 @@ $("input:radio, input:checkbox").change(function () {
                 break;
         }
 
-        if ($('input[name=r_product]:checked').val() == "Sense")
+        switch ($('input[name=r_product]:checked').val() == "Sense")
+        {
+            case "Sense":
+                _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Sense®");
+                break;
+            case "QlikView":
+                _.find(languageData, { 'Tags': "x_product" }).Text = btoa("QlikView®");
+                break;
+        }
+
+        /*if ($('input[name=r_product]:checked').val() == "Sense")
             _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Sense®");
         else
-            _.find(languageData, { 'Tags': "x_product" }).Text = btoa("QlikView®");
+            _.find(languageData, { 'Tags': "x_product" }).Text = btoa("QlikView®");*/
 
         $("#container-data").html(function() {
             return getText("masterpage");
@@ -155,6 +185,7 @@ function getText(tags) {
     x_azure = $('input[name="chk_Azure"]').is(':checked');
     x_sense = $('input[name=r_product]:checked').val() == "Sense";
     x_qlikview = $('input[name=r_product]:checked').val() == "QlikView";
+    x_qap = $('input[name=r_product]:checked').val() == "QAP";
 
     // sort by most tags (?????)
     var z = _.sortBy(languageData, function(n) {
@@ -370,12 +401,9 @@ String.prototype.checkPlatform = function() {
             if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
             if (this == "QVS/Engine") return "Qlik Sense Rim Node";
             if (this == "Central") return "Qlik Sense Central Node";
-        } else if ($('input[name=r_users]:checked').val().toLowerCase() == "small") {
+        } else {
             if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
             if (this == "QVS/Engine") return "Qlik Sense Central Node";
-        } else {
-            if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
-            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
         }
     }
     return this;
