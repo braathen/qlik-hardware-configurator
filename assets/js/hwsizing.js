@@ -136,7 +136,7 @@ $("input:radio, input:checkbox").change(function () {
                 _.find(languageData, { 'Tags': "x_product" }).Text = btoa("QlikView®");
                 break;
             case "qap":
-                _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Analytics Platform");
+                _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik® Analytics Platform");
                 break;
         }
 
