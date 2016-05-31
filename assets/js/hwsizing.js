@@ -39,12 +39,12 @@ $("input:radio, input:checkbox").change(function () {
     if (current == "r_product")
     {
         // if QAP is selected/deselected
-        switch ($('input[name=r_product]:checked').val().toLowerCase()) {
+        switch (currentProduct()) {
             case "qap":
                 $('#optionalXSmall').show();
                 break;
             default:
-                if ($('input[name=r_users]:checked').val() == "XSMALL")
+                if (currentUsers("xsmall"))
                 {
                     $('input[name=r_users]').attr('checked', false);
                     $('input[name=r_users]').prop('checked', false);
@@ -62,14 +62,14 @@ $("input:radio, input:checkbox").change(function () {
         $('input[name=chk_options]').prop('checked', false);
         $('#l_options').removeClass('active');
 
-        switch ($('input[name=r_users]:checked').val().toLowerCase()) {
+        switch (currentUsers()) {
             case "xsmall":
                 $('#optionalCheckbox').hide();
                 $('#optional').text('');
                 break;
             case "small":
                 $('#optionalCheckbox').show();
-                if ($('input[name=r_product]:checked').val() == "QAP")
+                if (currentProduct("QAP"))
                     $('#optional').text(' High availability');
                 else
                     $('#optional').text(' Intraday refresh');
@@ -110,8 +110,8 @@ $("input:radio, input:checkbox").change(function () {
         });
 
         // update variables
-        _.find(languageData, { 'Tags': "x_users" }).Text= $('input[name=r_users]:checked').val().toLowerCase();
-        switch ($('input[name=r_users]:checked').val().toLowerCase())
+        _.find(languageData, { 'Tags': "x_users" }).Text=currentUsers();
+        switch (currentUsers())
         {
             case "xsmall":
                 _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 20");
@@ -127,20 +127,18 @@ $("input:radio, input:checkbox").change(function () {
                 break;
         }
 
-        switch ($('input[name=r_product]:checked').val() == "Sense")
+        switch (currentProduct)
         {
-            case "Sense":
+            case "sense":
                 _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Sense®");
                 break;
-            case "QlikView":
+            case "qlikview":
                 _.find(languageData, { 'Tags': "x_product" }).Text = btoa("QlikView®");
                 break;
+            case "qap":
+                _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Analytics Platform");
+                break;
         }
-
-        /*if ($('input[name=r_product]:checked').val() == "Sense")
-            _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Sense®");
-        else
-            _.find(languageData, { 'Tags': "x_product" }).Text = btoa("QlikView®");*/
 
         $("#container-data").html(function() {
             return getText("masterpage");
@@ -303,7 +301,6 @@ $(document).ready(function(e){
     });
 
     $("#container-hardware").html(function() {
-        //var platform = ['Physical', 'Virtual', 'AWS', 'Azure'];
         var platform = _.uniq(_.map(sizingData, 'Platform'));
         var t = "";
         platform.forEach(function(item) {
@@ -360,7 +357,7 @@ $(document).ready(function(e){
        
 
 });
-
+/*
 function addCheckbox(name) {
    var container = $('#sidebar-platform');
    var inputs = container.find('input');
@@ -372,7 +369,7 @@ function addCheckbox(name) {
    $('<i />', { class: 'fa fa-check-square-o fa-2x' }).appendTo($('#lbl_' + name));
    $('<span>  ' + name + '</span>').appendTo($('#lbl_' + name));
 }
-
+*/
 function uniq(a) {
     _(a).forEach(function(n) {
       delete n['Optional'];
@@ -393,6 +390,22 @@ function uniq(a) {
         }
     }
     return b;
+}
+
+function currentProduct(p) {
+    var tmp = $('input[name=r_product]:checked').val() || '';
+    if (p)
+        return tmp.toLowerCase() == p.toLowerCase() ? true : false;
+    else
+        return tmp.toLowerCase();
+}
+
+function currentUsers(p) {
+    var tmp = $('input[name=r_users]:checked').val() || '';
+    if (p)
+        return tmp.toLowerCase() == p.toLowerCase() ? true : false;
+    else
+        return tmp.toLowerCase();
 }
 
 String.prototype.checkPlatform = function() {
