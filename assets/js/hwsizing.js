@@ -127,7 +127,7 @@ $("input:radio, input:checkbox").change(function () {
                 break;
         }
 
-        switch (currentProduct)
+        switch (currentProduct())
         {
             case "sense":
                 _.find(languageData, { 'Tags': "x_product" }).Text = btoa("Qlik Sense®");
