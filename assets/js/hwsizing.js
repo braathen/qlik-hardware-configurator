@@ -80,7 +80,11 @@ $("input:radio, input:checkbox").change(function () {
                 break;
             case "large":
                 $('#optionalCheckbox').show();
-                $('#optional').text(' High refresh rate');
+                if (currentProduct("QAP"))
+                    $('#optional').text(' High availability');
+                else
+                    $('#optional').text(' High refresh rate');
+                break;
                 break;
         }
     }
@@ -114,7 +118,7 @@ $("input:radio, input:checkbox").change(function () {
         switch (currentUsers())
         {
             case "xsmall":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 20");
+                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 100");
                 break;
             case "small":
                 _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 200");
