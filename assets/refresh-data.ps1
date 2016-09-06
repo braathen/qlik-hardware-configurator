@@ -23,7 +23,7 @@ Try {
     Write-Host -NoNewline "."
 
     # Users & volume configuration
-    $uservol = "var userVolume = " + ($wc.DownloadString($config_data) | ConvertFrom-Csv -Delimiter ',' | ConvertTo-Json -Compress | Out-String)
+    $uservol = "var userVolume = " + ($wc.DownloadString($config_uservol) | ConvertFrom-Csv -Delimiter ',' | ConvertTo-Json -Compress | Out-String)
     Out-File -inputobject $uservol -filepath "$current/data/config_uservol.js"
     Write-Host -NoNewline "."
     
