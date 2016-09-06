@@ -1,4 +1,5 @@
 $config_language = "https://docs.google.com/spreadsheets/d/18GG6fMRb9AlFSY4SVesTTl8i4YR11XHcPPjksua9-Cs/pub?output=csv"
+$config_uservol = "https://docs.google.com/spreadsheets/d/1VX7XzU_r5SJ2oFmmlmSYWasyvxiihcNz1iLIY27wiAE/pub?output=csv"
 $config_data = "https://docs.google.com/spreadsheets/d/1DHz86iUMtQNFc6jAPTXspJTFjUVEK4613eNQLrCrV2c/pub?output=csv"
 
 $current = Split-Path -Parent $PSCommandPath
@@ -19,6 +20,11 @@ Try {
 	# Data configuration
     $data = "var sizingData = " + ($wc.DownloadString($config_data) | ConvertFrom-Csv -Delimiter ',' | ConvertTo-Json -Compress | Out-String)
 	Out-File -inputobject $data -filepath "$current/data/config_data.js"
+    Write-Host -NoNewline "."
+
+    # Users & volume configuration
+    $uservol = "var userVolume = " + ($wc.DownloadString($config_data) | ConvertFrom-Csv -Delimiter ',' | ConvertTo-Json -Compress | Out-String)
+    Out-File -inputobject $uservol -filepath "$current/data/config_uservol.js"
     Write-Host -NoNewline "."
     
     $lang = ($wc.DownloadString($config_language) | ConvertFrom-Csv -Delimiter ',')

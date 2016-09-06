@@ -118,16 +118,20 @@ $("input:radio, input:checkbox").change(function () {
         switch (currentUsers())
         {
             case "xsmall":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 100");
+                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("100");
+                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("50");
                 break;
             case "small":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("< 200");
+                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("200");
+                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("100");
                 break;
             case "medium":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("200-800");
+                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("800");
+                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("200");
                 break;
             case "large":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("> 800");
+                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("800");
+                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("500");
                 break;
         }
 
@@ -290,6 +294,7 @@ $(document).ready(function(e){
     languageData.push({"Language":"en-us", "Tags":"x_platform", "Text": btoa(""), "Url": ""});
     languageData.push({"Language":"en-us", "Tags":"x_users", "Text": btoa(""), "Url": ""});
     languageData.push({"Language":"en-us", "Tags":"x_users_no", "Text": btoa(""), "Url": ""});
+    languageData.push({"Language":"en-us", "Tags":"x_data_vol", "Text": btoa(""), "Url": ""});
     languageData.push({"Language":"en-us", "Tags":"x_product", "Text": btoa(""), "Url": ""});
 
 /*    $("#container-disclaimer").html(function() {
