@@ -71,10 +71,12 @@ $("input:radio, input:checkbox").change(function () {
         $('#l_options').removeClass('active');
 
         switch (currentUsers()) {
-            case "xsmall":
+/*            case "xsmall":
                 $('#optionalCheckbox').hide();
                 $('#optional').text('');
                 break;
+*/
+            case "xsmall":
             case "small":
                 $('#optionalCheckbox').show();
                 if (currentProduct("QAP"))
