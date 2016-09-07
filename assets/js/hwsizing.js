@@ -16,6 +16,14 @@ sizingData.forEach(function(p) {
     }
 });
 
+var allMetrics = _.filter(userVolume, { 'Product': 'sense' });
+for(var i = 0; i < allMetrics.length; i++) {
+    var o = allMetrics[i];
+    if (o.Users > 0)
+        $('#users_' + o.Size).text($('#users_' + o.Size).text().replace(/(.*)\s(\d+)\s(.*)\s(\d+)(m.*)/, '$1 ' + o.Users + ' $3 ' + o.Data + '$5'));
+}
+
+
 $("input:radio, input:checkbox").change(function () {
 
     var current = this.name.replace('chk_','');
@@ -115,24 +123,24 @@ $("input:radio, input:checkbox").change(function () {
 
         // update variables
         _.find(languageData, { 'Tags': "x_users" }).Text=currentUsers();
-        switch (currentUsers())
+
+        var currentMetrics = _.filter(userVolume, { 'Product': currentProduct(), 'Size': currentUsers() });
+        if(typeof $('input[name=chk_options]:checked').val() !== "undefined")
+            var multi = currentMetrics[0].Multiplier;
+        else
+            var multi = 1;
+
+        _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa(currentMetrics[0].Users * multi);
+        _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa(currentMetrics[0].Data * multi);
+
+        if (current == "options")
         {
-            case "xsmall":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("100");
-                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("50");
-                break;
-            case "small":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("200");
-                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("100");
-                break;
-            case "medium":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("800");
-                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("200");
-                break;
-            case "large":
-                _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa("800");
-                _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa("500");
-                break;
+            var allMetrics = _.filter(userVolume, { 'Product': currentProduct() });
+            for(var i = 0; i < allMetrics.length; i++) {
+                var o = allMetrics[i];
+                if (o.Users > 0)
+                    $('#users_' + o.Size).text($('#users_' + o.Size).text().replace(/(.*)\s(\d+)\s(.*)\s(\d+)(m.*)/, '$1 ' + o.Users * multi + ' $3 ' + o.Data * multi + '$5'));
+          }
         }
 
         switch (currentProduct())
