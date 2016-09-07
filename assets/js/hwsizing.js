@@ -138,6 +138,11 @@ $("input:radio, input:checkbox").change(function () {
             var allMetrics = _.filter(userVolume, { 'Product': currentProduct() });
             for(var i = 0; i < allMetrics.length; i++) {
                 var o = allMetrics[i];
+                if(typeof $('input[name=chk_options]:checked').val() !== "undefined")
+                    var multi = o.Multiplier;
+                else
+                    var multi = 1;
+
                 if (o.Users > 0)
                     $('#users_' + o.Size).text($('#users_' + o.Size).text().replace(/(.*)\s(\d+)\s(.*)\s(\d+)(m.*)/, '$1 ' + o.Users * multi + ' $3 ' + o.Data * multi + '$5'));
           }
