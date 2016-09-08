@@ -432,6 +432,7 @@ function currentUsers(p) {
         return tmp.toLowerCase();
 }
 
+/*
 String.prototype.checkPlatform = function() {
     if ($('input[name=r_product]:checked').val() == "QlikView") {
         if (this == "PUB/Scheduler") return "QlikView Publisher";
@@ -448,3 +449,23 @@ String.prototype.checkPlatform = function() {
     }
     return this;
 };
+
+*/
+
+String.prototype.checkPlatform = function() {
+    if ($('input[name=r_product]:checked').val() == "QlikView") {
+        if (this == "PUB/Scheduler") return "QlikView Publisher";
+        if (this == "QVS/Engine") return "QlikView Server";
+    } else {
+        if ($('input[name=r_users]:checked').val().toLowerCase() == "large") {
+            if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
+            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
+            if (this == "Central") return "Qlik Sense Central Node";
+        } else {
+            if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
+            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
+        }
+    }
+    return this;
+};
+
