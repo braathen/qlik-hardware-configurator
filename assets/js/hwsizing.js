@@ -324,6 +324,10 @@ $(document).ready(function(e){
         return getText("welcomepage");
     });
 
+    $("#container-needsomethingelse").html(function() {
+        return getText("needsomethingelse");
+    });
+
     $("#container-hardware").html(function() {
         var platform = _.uniq(_.map(sizingData, 'Platform'));
         var t = "";

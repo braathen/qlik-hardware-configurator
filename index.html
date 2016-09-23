@@ -125,6 +125,11 @@
           <span class="glyphicon glyphicon-share-alt"></span> Performance Metrics
         </a> 
       </div>
+      <div class="feedback" style="margin-left: 15px; margin-top: 15px; font-size: large;">
+        <a href="#help-toggle" id="help-toggle" style="color: #c8c8c8;">
+          <span class="glyphicon glyphicon-share-alt"></span> Need something else?
+        </a> 
+      </div>
     </div>
   </div>
 
@@ -148,6 +153,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="container-welcomepage"></div>
+                            <div id="container-needsomethingelse" style="display:none;"></div>
                         </div>
                     </div>
                 </div>
@@ -264,6 +270,12 @@
         $(this).text(function(i, text){
             return text === "Generate Sizing Report" ? "Back" : "Generate Sizing Report";
         })
+    });
+
+    $("#help-toggle").click(function(e) {
+        $('#container-welcomepage').toggle();
+        $('#container-needsomethingelse').toggle();
+        e.preventDefault();
     });
     </script>
 
