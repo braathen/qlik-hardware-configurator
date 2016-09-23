@@ -22,6 +22,9 @@ Add-Type -assembly "system.io.compression.filesystem"
 If (Test-Path "$current\assets") {
     Remove-Item -Recurse -Force "$current\assets" | Out-Null
 }
+If (Test-Path "$current\metrics") {
+    Remove-Item -Recurse -Force "$current\metrics" | Out-Null
+}
 If (Test-Path "$current\index.html") {
     Remove-Item -Recurse -Force "$current\index.html" | Out-Null
 }
