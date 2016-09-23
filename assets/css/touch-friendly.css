@@ -43,16 +43,15 @@ div[data-toggle="buttons"] label {
 display: inline-block;
 padding: 6px 12px;
 margin-bottom: 0;
-font-size: 14px;
+font-size: 12px;
 font-weight: normal;
-line-height: 2em;
+line-height: 1em;
 text-align: left;
 white-space: nowrap;
 vertical-align: top;
 cursor: pointer;
 background-color: none;
-border: 0px solid 
-#c8c8c8;
+border: 0px solid #c8c8c8;
 border-radius: 3px;
 color: #c8c8c8;
 -webkit-user-select: none;
