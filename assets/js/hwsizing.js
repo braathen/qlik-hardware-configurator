@@ -65,7 +65,7 @@ $("input:radio, input:checkbox").change(function () {
         }
     }
     */
-    
+
     if (current == "r_users")
     {
         $('input[name=chk_options]').attr('checked', false);
@@ -129,26 +129,26 @@ $("input:radio, input:checkbox").change(function () {
         _.find(languageData, { 'Tags': "x_users" }).Text=currentUsers();
 
         var currentMetrics = _.filter(userVolume, { 'Product': currentProduct(), 'Size': currentUsers() });
-        if(typeof $('input[name=chk_options]:checked').val() !== "undefined")
+  /*      if(typeof $('input[name=chk_options]:checked').val() !== "undefined")
             var multi = currentMetrics[0].Multiplier;
         else
             var multi = 1;
-
-        _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa(currentMetrics[0].Users * multi);
-        _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa(currentMetrics[0].Data * multi);
+*/
+        _.find(languageData, { 'Tags': "x_users_no" }).Text= btoa(currentMetrics[0].Users * currentMetrics[0].Multiplier);
+        _.find(languageData, { 'Tags': "x_data_vol" }).Text= btoa(currentMetrics[0].Data * currentMetrics[0].Multiplier);
 
         if (current == "options")
         {
             var allMetrics = _.filter(userVolume, { 'Product': currentProduct() });
             for(var i = 0; i < allMetrics.length; i++) {
                 var o = allMetrics[i];
-                if(typeof $('input[name=chk_options]:checked').val() !== "undefined")
+/*                if(typeof $('input[name=chk_options]:checked').val() !== "undefined")
                     var multi = o.Multiplier;
                 else
                     var multi = 1;
-
+*/
                 if (o.Users > 0)
-                    $('#users_' + o.Size).text($('#users_' + o.Size).text().replace(/(.*)\s(\d+)\s(.*)\s(\d+)(m.*)/, '$1 ' + o.Users * multi + ' $3 ' + o.Data * multi + '$5'));
+                    $('#users_' + o.Size).text($('#users_' + o.Size).text().replace(/(.*)\s(\d+)\s(.*)\s(\d+)(m.*)/, '$1 ' + o.Users * currentMetrics[0].Multiplier + ' $3 ' + o.Data * currentMetrics[0].Multiplier + '$5'));
           }
         }
 
