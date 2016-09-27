@@ -44,6 +44,7 @@ $("input:radio, input:checkbox").change(function () {
         }
     });
 
+    /*
     if (current == "r_product")
     {
         // if QAP is selected/deselected
@@ -63,7 +64,8 @@ $("input:radio, input:checkbox").change(function () {
                 break;
         }
     }
-
+    */
+    
     if (current == "r_users")
     {
         $('input[name=chk_options]').attr('checked', false);
