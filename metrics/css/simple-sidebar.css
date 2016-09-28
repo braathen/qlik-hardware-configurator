@@ -266,6 +266,15 @@
 .results{
     margin-top: 10px;
 }
+
+.qv-object-variable .material button, .qv-object-variable .material input, .qv-object-variable .material select {
+    box-shadow: none !important;
+}    
+
+.sel-toolbar-list td, thead  {
+    border: none !important;
+}    
+
 .qui-immidiateContextual .content {
     background: #FFFFFF;
     border-left: 2px solid #FFFFFF;
