@@ -101,7 +101,7 @@ require( ["js/qlik"], function ( qlik ) {
     //open apps -- inserted here --
     //var app = qlik.openApp('QAHCMash.qvf', config);
     //var app = qlik.openApp('750bd453-3b7b-4998-83a6-6fcd62ae7469', config);
-    var app = qlik.openApp('eaf5e81c-223f-4238-9d50-c924c46056df', config);
+    var app = qlik.openApp('1f4602ea-b27a-4c19-8ca4-55ba72af6269', config);
 
 
     //get objects -- first App Group --
