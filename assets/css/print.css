@@ -1,5 +1,9 @@
 #sidebar-wrapper, #menu-toggle {
-	display: none;
+	display: none !important;
+}
+
+.noprint {
+	display: none !important;
 }
 
 #wrapper {
