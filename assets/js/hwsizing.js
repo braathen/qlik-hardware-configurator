@@ -456,26 +456,33 @@ String.prototype.checkPlatform = function() {
 
 String.prototype.checkPlatform = function() {
     if ($('input[name=r_product]:checked').val() == "QlikView") {
-        if ($('input[name=r_users]:checked').val().toLowerCase() == "small") {
-            if (this == "QVS/Engine") return "QlikView Server (& Publisher)";
-        }
-        else
+        switch ($('input[name=r_users]:checked').val().toLowerCase())
         {
-            if (this == "PUB/Scheduler") return "QlikView Publisher";
-            if (this == "QVS/Engine") return "QlikView Server";
+            case "small":
+            case "x-small":
+                if (this == "QVS/Engine") return "QlikView Server (& Publisher)";
+                break;
+            case default:
+                if (this == "PUB/Scheduler") return "QlikView Publisher";
+                if (this == "QVS/Engine") return "QlikView Server";
+                break;
         }
     } else {
-        if ($('input[name=r_users]:checked').val().toLowerCase() == "large") {
-            if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
-            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
-            if (this == "Central") return "Qlik Sense Central Node";
-        }
-        if ($('input[name=r_users]:checked').val().toLowerCase() == "medium") {
-            if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
-            if (this == "QVS/Engine") return "Qlik Sense Rim Node";
-        } else {
-            if (this == "QVS/Engine") return "Qlik Sense Central Node";
-            if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
+        switch ($('input[name=r_users]:checked').val().toLowerCase())
+        {
+            case "large":
+                if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
+                if (this == "QVS/Engine") return "Qlik Sense Rim Node";
+                if (this == "Central") return "Qlik Sense Central Node";
+                break;
+            case "medium":
+                if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
+                if (this == "QVS/Engine") return "Qlik Sense Rim Node";
+                break;
+            case default:
+                if (this == "QVS/Engine") return "Qlik Sense Central Node";
+                if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
+                break;
         }
     }
     return this;
