@@ -459,7 +459,7 @@ String.prototype.checkPlatform = function() {
         switch ($('input[name=r_users]:checked').val().toLowerCase())
         {
             case "small":
-            case "x-small":
+            case "xsmall":
                 if (this == "QVS/Engine") return "QlikView Server (& Publisher)";
                 break;
             default:
