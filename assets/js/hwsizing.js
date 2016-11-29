@@ -456,16 +456,26 @@ String.prototype.checkPlatform = function() {
 
 String.prototype.checkPlatform = function() {
     if ($('input[name=r_product]:checked').val() == "QlikView") {
-        if (this == "PUB/Scheduler") return "QlikView Publisher";
-        if (this == "QVS/Engine") return "QlikView Server";
+        if ($('input[name=r_users]:checked').val().toLowerCase() == "small") {
+            if (this == "QVS/Engine") return "QlikView Server (& Publisher)";
+        }
+        else
+        {
+            if (this == "PUB/Scheduler") return "QlikView Publisher";
+            if (this == "QVS/Engine") return "QlikView Server";
+        }
     } else {
         if ($('input[name=r_users]:checked').val().toLowerCase() == "large") {
             if (this == "PUB/Scheduler") return "Qlik Sense Scheduler Node";
             if (this == "QVS/Engine") return "Qlik Sense Rim Node";
             if (this == "Central") return "Qlik Sense Central Node";
-        } else {
+        }
+        if ($('input[name=r_users]:checked').val().toLowerCase() == "medium") {
             if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
             if (this == "QVS/Engine") return "Qlik Sense Rim Node";
+        } else {
+            if (this == "QVS/Engine") return "Qlik Sense Central Node";
+            if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
         }
     }
     return this;
