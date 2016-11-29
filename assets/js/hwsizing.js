@@ -462,7 +462,7 @@ String.prototype.checkPlatform = function() {
             case "x-small":
                 if (this == "QVS/Engine") return "QlikView Server (& Publisher)";
                 break;
-            case default:
+            default:
                 if (this == "PUB/Scheduler") return "QlikView Publisher";
                 if (this == "QVS/Engine") return "QlikView Server";
                 break;
@@ -479,7 +479,7 @@ String.prototype.checkPlatform = function() {
                 if (this == "PUB/Scheduler") return "Qlik Sense Central Node";
                 if (this == "QVS/Engine") return "Qlik Sense Rim Node";
                 break;
-            case default:
+            default:
                 if (this == "QVS/Engine") return "Qlik Sense Central Node";
                 if (this == "PUB/Scheduler") return "Qlik Sense Rim Node";
                 break;
